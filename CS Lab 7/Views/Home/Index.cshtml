@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Вечеринка!!!</h1>
+    <p class="lead">Я приглашаю тебя на наикрутейшую новогоднюю вечеринку. Просто заполни форму!</p>
+    @Html.ActionLink("Хочу на вечеринку!", "RsvpForm",null, new { @class ="btn btn-primary btn-lg"} )
+</div>
