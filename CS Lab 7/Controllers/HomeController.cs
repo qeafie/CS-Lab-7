@@ -2,6 +2,7 @@
 using CS_Lab_7.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -39,8 +40,21 @@ namespace CS_Lab_7.Controllers
         {
             if (ModelState.IsValid)
             {
-                dataBase.GuestResponses.Add(guestResponse);
-                dataBase.SaveChanges();
+                GuestResponse guestResponse1 = dataBase.GuestResponses.SingleOrDefault(g => g.Email == guestResponse.Email);
+                if (guestResponse == null)
+                {
+                    dataBase.GuestResponses.Add(guestResponse);
+                    dataBase.SaveChanges();
+
+
+                }
+                else
+                {
+                    dataBase.GuestResponses.Where(g => g.Email == guestResponse.Email).SingleOrDefault().WillAttend = guestResponse.WillAttend;
+                    dataBase.SaveChanges();                                   
+                }
+                
+
                 return View("Thanks", guestResponse);
             }
                 
